@@ -28,15 +28,15 @@ router.post('/task',async (req,res)=>{
 // Update task
 router.put('/task/:id',async(req,res)=>{
     try {
-        const finished = await Task.findById(req.params.id);
-        if ( finished.finished){
+        
+        if ( req.body.finished){
             const task = await Task.findByIdAndUpdate(
                 req.params.id,
                 {   
                       title: req.body.title,
                       description: req.body.description,
                       finished: req.body.finished,
-                      finished_at: null,
+                      finished_at: Date.now(),
                       updated_at: Date.now()
                       
       
@@ -52,7 +52,7 @@ router.put('/task/:id',async(req,res)=>{
                       title: req.body.title,
                       description: req.body.description,
                       finished: req.body.finished,
-                      finished_at:req.body.finished_at,
+                      finished_at:null,
                       updated_at: Date.now()
                       
       
@@ -68,6 +68,7 @@ router.put('/task/:id',async(req,res)=>{
       }
 
 })
+
 // Get task by id
 router.get('/task/:id',async (req,res) => {
     try {
