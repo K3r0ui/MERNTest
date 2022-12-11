@@ -5,6 +5,7 @@ import { message } from 'antd';
 import SigninForm from '../components/Auth/SigninForm';
 import { register,login } from '../services/auth.service';
 import RegisterForm from '../components/Auth/RegisterForm';
+import ResetPasswordForm from '../components/Auth/ResetPasswordForm';
 const AuthentificationPage = () => {
    const navigate = useNavigate();
    const [values, setValues] = useState({
@@ -14,6 +15,8 @@ const AuthentificationPage = () => {
       password: '',
       phonenumber: '',
    });
+
+   const [resetState,setResetState] = useState(false)
    const [authState,setAuthState] = useState(true)
    const { firstName, lastName, email, phonenumber,  password} = values;
 
@@ -62,16 +65,19 @@ const AuthentificationPage = () => {
    return (
     
       <>
-      {authState ? <>
+      {resetState && <> <ResetPasswordForm /></>}
+      {!resetState && authState ? <>
       <button>
-      <Link onClick={()=>{setAuthState(false)}} to="/auth">login now!</Link></button>
-      <RegisterForm  handleRegisterSubmit={handleRegisterSubmit} handleRegisterChange={handleRegisterChange} /> </>: 
-      <><button>
-      <Link onClick={()=>{setAuthState(true)}} to="/auth">register now!</Link></button>
-      <SigninForm  handleLoginSubmit={handleLoginSubmit} handleLoginChange={handleLoginChange} />
-      </>}
-      
+      <Link onClick={()=>{setAuthState(false);setResetState(false)}} to="/auth">login now!</Link></button>
+      <RegisterForm setResetState={setResetState} handleRegisterSubmit={handleRegisterSubmit} handleRegisterChange={handleRegisterChange} /> </>:
+      <>{!resetState &&       <><button>
+        <Link onClick={()=>{setAuthState(true);setResetState(false)}} to="/auth">register now!</Link></button>
+        <SigninForm  setResetState={setResetState} handleLoginSubmit={handleLoginSubmit} handleLoginChange={handleLoginChange} />
+        </> } </> 
+}
+       
       </>
+      
    );
    
 };

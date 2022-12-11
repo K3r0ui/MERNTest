@@ -1,8 +1,11 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-function SigninForm({ handleLoginChange, handleLoginSubmit }) {
+function SigninForm({ handleLoginChange, handleLoginSubmit,setResetState }) {
+   
+
    const validateMessages = {
       required: "${label} is required!",
       types: {
@@ -56,6 +59,7 @@ function SigninForm({ handleLoginChange, handleLoginSubmit }) {
         <Button type="primary" onClick={handleLoginSubmit} >
           Submit
         </Button>
+    Or <Link onClick={()=>{setResetState(true)}} to="/auth">Forget Password?!</Link>
       </Form.Item>
     </Form>
     </>);
