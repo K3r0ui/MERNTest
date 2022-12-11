@@ -51,7 +51,7 @@ router.post("/forgot-password", async (req,res) => {
            return res.status(404).send("user does't exist")
         }
         const secret ="azerty"
-        const token = jwt.sign({email:user.email,id:user._id},secret,{
+        const token = jwt.sign({id:user._id},secret,{
             expiresIn:"15m"
         })
        const link=`http://localhost:8080/reset-password/${user._id}/${token}`

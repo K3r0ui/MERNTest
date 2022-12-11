@@ -1,8 +1,13 @@
-import React from 'react'
-
+import React from 'react';
+import { SmileOutlined } from '@ant-design/icons';
+import { Button, Result } from 'antd';
 function Home() {
   return (
-    <div>Home</div>
+    <Result
+    icon={<SmileOutlined />}
+    title="Welcome to my ToDoList"
+    
+  />
   )
 }
 
