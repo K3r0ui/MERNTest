@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Popconfirm, Modal } from 'antd';
 import { message } from 'antd';
 import TaskForm from './TaskForm';
+import moment from 'moment'
 const Task = (props) => {
    const { task, handleDeleteTaskById, handleUpdateTask, setData } = props;
    const [visible, setVisible] = useState(false);
@@ -43,11 +44,11 @@ const Task = (props) => {
             <th scope='row'>1</th>
             <td>{task.title}</td>
             <td>{task.description}</td>
-            <td> {task.finished?<>aaa</>:<>bce</>}</td>
-            <td> {task.created_at}</td>
-            <td> {task.finished_at}</td>
+            <td> {task.finished?<>Task is Done</>:<>Not Done Yet</>}</td>
+            <td> {moment(task.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
+            <td> {task.finished_at?moment(task.finished_at).format('MMMM Do YYYY, h:mm:ss a'):<>Task still running</>}</td>
             
-            <td> {task.updated_at}</td>
+            <td> {moment(task.updated_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
             <td>
 
                   <div
