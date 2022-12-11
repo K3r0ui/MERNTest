@@ -39,3 +39,12 @@ export const reset = async ( email) => {
     );
     return data;
  };
+
+ export const resetpsw = async ( id , token , password) => {
+    
+    const { data } = await Axios.post(
+       'http://localhost:8080/reset-password/'+id+'/'+token,
+       password
+    );
+    return data;
+ };

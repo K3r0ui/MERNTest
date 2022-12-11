@@ -55,7 +55,7 @@ router.post("/forgot-password", async (req,res) => {
         const token = jwt.sign({id:user._id},secret,{
             expiresIn:"15m"
         })
-       const link=`http://localhost:8080/reset-password/${user._id}/${token}`
+       const link=`http://localhost:3000/reset-password/${user._id}/${token}`
        var transport = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,

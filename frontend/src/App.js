@@ -6,6 +6,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbars from './components/Navbars';
 import AuthentificationPage from './pages/AuthentificationPage';
+import ChangePsw from './pages/ChangePsw';
 function App() {
   const isConnected = localStorage.getItem('token');
   return (
@@ -19,6 +20,7 @@ function App() {
           
           <Route path="/auth" element={<AuthentificationPage />}/>
           <Route path='/not-found' element={<NotFoundPage />} />
+          <Route path='/reset-password/:id/:token' element={<ChangePsw />} />
           <Route path='*' element={<Navigate to='/not-found' replace />} />
           
         </Routes>
