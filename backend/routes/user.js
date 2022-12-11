@@ -7,11 +7,12 @@ var nodemailer = require('nodemailer');
 const { User } = require('../models/user');
 
 router.post('/signup', async (req, res) => {
+    
     let user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 15),
+        password: req.body.password,
         phonenumber: req.body.phonenumber,
     })
     user = await user.save();
@@ -28,8 +29,9 @@ router.post('/login', async (req, res) => {
     if (!user) {
         return res.status(400).send('the user not found')
     }
-    
-    if (user && bcrypt.compareSync(req.body.password, user.password)) {
+    const validPwd = await bcrypt.compareSync(req.body.password, user.password);
+    console.log(validPwd)
+    if (user && validPwd) {
         const token = jwt.sign({
             userId: user.id,
         },

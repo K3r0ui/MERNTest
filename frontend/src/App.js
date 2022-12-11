@@ -7,18 +7,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbars from './components/Navbars';
 import AuthentificationPage from './pages/AuthentificationPage';
 function App() {
+  const isConnected = localStorage.getItem('token');
   return (
     <div className="App">
       <BrowserRouter>
       <div className="pages">
         <Navbars/>
         <Routes>
+          {isConnected && <><Route path="/taskpage" element={<TaskPage />}/><Route path= '/logout' element={ <Logout /> } /></>}
           <Route path="/" element={<Home />}/>
-          <Route path="/taskpage" element={<TaskPage />}/>
+          
           <Route path="/auth" element={<AuthentificationPage />}/>
           <Route path='/not-found' element={<NotFoundPage />} />
           <Route path='*' element={<Navigate to='/not-found' replace />} />
-          <Route path= '/logout' element={ <Logout /> } />
+          
         </Routes>
       </div>
       </BrowserRouter>
