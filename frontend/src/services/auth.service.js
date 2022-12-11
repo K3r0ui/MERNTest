@@ -27,3 +27,15 @@ export const register = async (firstName, lastName, email, phonenumber, password
    );
    return data;
 };
+
+
+    
+
+export const reset = async ( email) => {
+    
+    const { data } = await Axios.post(
+       'http://localhost:8080/forgot-password',
+       email
+    );
+    return data;
+ };

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import SigninForm from '../components/Auth/SigninForm';
-import { register,login } from '../services/auth.service';
+import { register,login,reset } from '../services/auth.service';
 import RegisterForm from '../components/Auth/RegisterForm';
 import ResetPasswordForm from '../components/Auth/ResetPasswordForm';
 const AuthentificationPage = () => {
@@ -61,11 +61,28 @@ const AuthentificationPage = () => {
        message.error('login failed!');
     }
  };
+ const handleResetChange = (email) => (e) => {
+    console.log(e.target.value);
+    setValues({ ...values, [email]: e.target.value });
+ };
+  
+ const handleResetSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email)
+    try {
+       const res = await reset(email);
+       console.log(res)
+       message.success('Password sent to mail');
+    } catch (err) {
+       console.error(err.message);
+       message.error('reset failed!');
+    }
+ };
    
    return (
     
       <>
-      {resetState && <> <ResetPasswordForm /></>}
+      {resetState && <> <ResetPasswordForm handleResetChange={handleResetChange} handleResetSubmit={handleResetSubmit}  /></>}
       {!resetState && authState ? <>
       <button>
       <Link onClick={()=>{setAuthState(false);setResetState(false)}} to="/auth">login now!</Link></button>

@@ -44,11 +44,10 @@ router.post('/login', async (req, res) => {
     }
 });
 router.post("/forgot-password", async (req,res) => {
-    const{email} = req.body;
     
+    const {email} = req.body
     try {
         const user = await User.findOne({email})
-        console.log(user)
         if ( !user){
            return res.status(404).send("user does't exist")
         }
@@ -57,28 +56,25 @@ router.post("/forgot-password", async (req,res) => {
             expiresIn:"15m"
         })
        const link=`http://localhost:8080/reset-password/${user._id}/${token}`
-    //    var transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //       user: 'youremail@gmail.com',
-    //       pass: 'yourpassword'
-    //     }
-    //   });
+       var transport = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        auth: {
+          user: process.env.USER_EMAIL,
+          pass: process.env.USER_PASSWORD
+        }
+      });
       
-    //   var mailOptions = {
-    //     from: 'youremail@gmail.com',
-    //     to: 'myfriend@yahoo.com',
-    //     subject: 'Sending Email using Node.js',
-    //     text: 'That was easy!'
-    //   };
       
-    //   transporter.sendMail(mailOptions, function(error, info){
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('Email sent: ' + info.response);
-    //     }
-    //   });
+      var mailOptions = {
+        from: '"Example Team" <from@example.com>',
+        to: req.body.email,
+        subject: 'Reset Password',
+        text: 'Hey There , to reset your password click on the link ',
+        html: `<b>Hey there! </b><br><a href="${link}">Click here</a>`
+    };
+transport.sendMail(mailOptions)
+    res.status(200).send(link)
        console.log(link)
     } catch (error) {
         console.log("error")
