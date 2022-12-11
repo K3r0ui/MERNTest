@@ -5,6 +5,7 @@ import TaskForm from './TaskForm';
 const Task = (props) => {
    const { task, handleDeleteTaskById, handleUpdateTask, setData } = props;
    const [visible, setVisible] = useState(false);
+   const [updateos,setUpdateos]= useState(true)
    //fonctions pour formulaire
 
    //faire la mise a jour
@@ -79,6 +80,7 @@ const Task = (props) => {
             onCancel={handleCancel}
             okButtonProps={{ disabled: true }}>
             <TaskForm
+               updateos={updateos}
                finish={finish}
                initialValues={{
                   title: task.title,

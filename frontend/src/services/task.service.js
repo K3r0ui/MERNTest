@@ -22,8 +22,9 @@ export const postTask = async (title,description)=>{
     }  
 }
 export const updateTask = async (id,title,description,finished)=>{
+    const data = {title,description,finished}
         try {
-        const result = await Axios.put(`http://localhost:8080/api/task/${id}`,id,title,description,finished)
+        const result = await Axios.put('http://localhost:8080/api/task/'+id,data)
         return result.data
         } catch (error) {
             console.log("eRROR")

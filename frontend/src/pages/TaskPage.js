@@ -31,16 +31,19 @@ const TaskPage = () => {
 
    // fonction pour fair l'appdate
    const handleUpdateTask = async (id, title,description,  finished) => {
-      const srs = await updateTask(id, title, description, finished);
-      console.log(srs)
+      const src = await updateTask(id, title, description, finished);
+      console.log(src)
       const newData = data.map((x) => {
          if (x._id === id) {
-            x.title = title;
-            x.description = description;
-            x.finished = finished;
+            x.title = src.title;
+            x.description = src.description;
+            x.finished = src.finished;
+            x.finished_at = src.finished_at;
+            x.updated_at=src.updated_at
          }
          return x;
       });
+      console.log(newData)
       setData(newData);
    };
 

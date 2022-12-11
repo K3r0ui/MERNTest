@@ -1,4 +1,6 @@
 import Task from "./Task";
+import React from 'react';
+import { Space, Table, Tag } from 'antd';
 const TaskList = (props) => {
    const { handleDeleteTaskById, handleUpdateTask, data, setData } = props;
 

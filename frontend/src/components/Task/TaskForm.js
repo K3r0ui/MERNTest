@@ -4,14 +4,32 @@ import { useState } from 'react';
 const TaskForm = (props) => {
    const [form] = Form.useForm();
    const { Option } = Select;
+   
    const onFinish = (values) => {
-      props.finish(values.title,values.description);
-      message.success('Submit success!');
+      if(!props.updateos){
+         props.finish(values.title,values.description);
+         message.success('Submit success!');
+      }else{
+         if (values.finished == false){
+            props.finish(values.title,values.description,values.finished);
+            message.success('Submit update success!');
+         }else{
+            props.finish(values.title,values.description,values.finished);
+         }
+      }
+
+
    };
    function onSearch(val) {
       console.log('search:', val);
    }
-
+//    function onChange(checked) {
+//       setDone(checked)
+//       console.log(done)
+//   }
+const handleChange = (value) => {
+   console.log(`selected ${value}`);
+ };
    const onFinishFailed = () => {
       message.error('Submit failed!');
    };
@@ -52,6 +70,24 @@ const TaskForm = (props) => {
                      placeholder='desc'
                   />
                </Form.Item>
+               {props.updateos &&  <Form.Item name="finished" label="finished">
+               <Select
+      defaultValue={props.initialValues.finished}
+      style={{
+        width: 120,
+      }}
+      onChange={handleChange}
+      options={[
+        {
+          value: true,
+          label: 'Finished',
+        },
+        {
+          value: false,
+          label: 'Not Finished',
+        }      ]}
+        />
+               </Form.Item>}
                <center>
                   <Space>
                      <Button
