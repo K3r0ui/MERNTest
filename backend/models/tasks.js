@@ -13,6 +13,7 @@ const taskSchema = new Schema(  {
     },
     finished: {
       type:Boolean,
+      default:false
     },
     finished_at: {
         type:Date,

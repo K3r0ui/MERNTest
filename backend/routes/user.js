@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
+var nodemailer = require('nodemailer');
 const { User } = require('../models/user');
 
 router.post('/signup', async (req, res) => {
@@ -55,6 +55,28 @@ router.post("/forgot-password", async (req,res) => {
             expiresIn:"15m"
         })
        const link=`http://localhost:8080/reset-password/${user._id}/${token}`
+    //    var transporter = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     auth: {
+    //       user: 'youremail@gmail.com',
+    //       pass: 'yourpassword'
+    //     }
+    //   });
+      
+    //   var mailOptions = {
+    //     from: 'youremail@gmail.com',
+    //     to: 'myfriend@yahoo.com',
+    //     subject: 'Sending Email using Node.js',
+    //     text: 'That was easy!'
+    //   };
+      
+    //   transporter.sendMail(mailOptions, function(error, info){
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('Email sent: ' + info.response);
+    //     }
+    //   });
        console.log(link)
     } catch (error) {
         console.log("error")
