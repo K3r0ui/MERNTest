@@ -1,0 +1,40 @@
+version: "2.0"
+services:
+  #############################################
+  ##           BOXSTAGE NODE              ##
+  #############################################
+  backendservice:
+    environment:
+      - PORT=8080
+      - MONGO_URI="mongodb+srv://krw:krw@cluster0.msfcelu.mongodb.net/?retryWrites=true&w=majority"
+      - SALT_FACTOR=8
+      - JWTSECRETKEY="azerty"
+      - USER_EMAIL="abb64f31d33a5c"
+      - USER_PASSWORD="016b22dda472bb"
+      - EMAIL_HOST="smtp.mailtrap.io"
+      - EMAIL_PORT="25"
+    build: ./backend
+    image: backendservice
+    ports:
+      - "8080:8080"
+    networks:
+      pentabell-network:
+        aliases:
+          - network_backend
+  ############################################
+  #           FrontService             ##
+  ############################################
+  frontendservice:
+    image: frontendservice
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backendservice
+    networks:
+      pentabell-network:
+        aliases:
+          - network_frontend
+networks:
+  pentabell-network:
+    driver: bridge

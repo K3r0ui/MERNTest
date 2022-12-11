@@ -13,7 +13,7 @@ app.use('/api',tasksRouter)
 app.use('/',userRouter)
 // porT LISTEN after connexion to db
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URI).then(()=>{
+mongoose.connect("mongodb+srv://krw:krw@cluster0.msfcelu.mongodb.net/?retryWrites=true&w=majority").then(()=>{
     app.listen(process.env.PORT, ()=> {
         console.log("DB connected and Port listening to",process.env.PORT);
     })
