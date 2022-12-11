@@ -28,8 +28,6 @@ const AuthentificationPage = () => {
       e.preventDefault();
       try {
          const src = await register(firstName,lastName,email,phonenumber,password);
-         console.log(password)
-         console.log(src)
          setAuthState(false)
          message.success('Sign up succesffully , Please Login Now');
 
@@ -40,7 +38,6 @@ const AuthentificationPage = () => {
       }
    };
    const handleLoginChange = (email) => (e) => {
-    console.log(e.target.value);
     setValues({ ...values, [email]: e.target.value });
  };
   
