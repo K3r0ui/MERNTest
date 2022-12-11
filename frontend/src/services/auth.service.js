@@ -32,16 +32,16 @@ export const register = async (firstName, lastName, email, phonenumber, password
     
 
 export const reset = async ( email) => {
-    
+
     const { data } = await Axios.post(
        'http://localhost:8080/forgot-password',
-       email
+      { 'email':email}
     );
     return data;
  };
 
  export const resetpsw = async ( id , token , password) => {
-    
+    console.log(password)
     const { data } = await Axios.post(
        'http://localhost:8080/reset-password/'+id+'/'+token,
        password

@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import SigninForm from '../components/Auth/SigninForm';
 import { register,login,reset } from '../services/auth.service';
@@ -28,6 +27,8 @@ const AuthentificationPage = () => {
       e.preventDefault();
       try {
          const src = await register(firstName,lastName,email,phonenumber,password);
+         console.log(password)
+         console.log(src)
          setAuthState(false)
          message.success('Sign up succesffully , Please Login Now');
 
@@ -38,6 +39,7 @@ const AuthentificationPage = () => {
       }
    };
    const handleLoginChange = (email) => (e) => {
+    console.log(e.target.value);
     setValues({ ...values, [email]: e.target.value });
  };
   
@@ -59,6 +61,7 @@ const AuthentificationPage = () => {
     }
  };
  const handleResetChange = (email) => (e) => {
+    console.log(e.target.value);
     setValues({ ...values, [email]: e.target.value });
  };
   
@@ -66,6 +69,7 @@ const AuthentificationPage = () => {
     e.preventDefault();
     try {
        const res = await reset(email);
+       console.log(res)
        message.success('Password sent to mail');
     } catch (err) {
        console.error(err.message);

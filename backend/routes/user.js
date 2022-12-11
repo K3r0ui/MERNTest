@@ -57,11 +57,11 @@ router.post("/forgot-password", async (req,res) => {
         })
        const link=`http://localhost:3000/reset-password/${user._id}/${token}`
        var transport = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
+        host: "smtp.mailtrap.io",
+        port: 2525,
         auth: {
-          user: process.env.USER_EMAIL,
-          pass: process.env.USER_PASSWORD
+          user: "abb64f31d33a5c",
+          pass: "016b22dda472bb"
         }
       });
       
