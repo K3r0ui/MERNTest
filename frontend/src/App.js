@@ -2,6 +2,7 @@ import {BrowserRouter, Routes,Route} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import TaskPage from './pages/TaskPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">

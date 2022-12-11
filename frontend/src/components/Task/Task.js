@@ -41,14 +41,20 @@ const Task = (props) => {
    return (
       <>
          <tr>
-            <th scope='row'>1</th>
-            <td>{task.title}</td>
+            {task.finished? <> <td><strike>{task.title}</strike></td>
+            <td><strike>{task.description}</strike></td>
+            <td> <strike>Task is Done</strike></td>
+            <td> <strike>{moment(task.created_at).format('MMMM Do YYYY, h:mm:ss a')}</strike></td>
+            <td> <strike>{moment(task.finished_at).format('MMMM Do YYYY, h:mm:ss a')}</strike></td>
+            <td> <strike>{moment(task.updated_at).format('MMMM Do YYYY, h:mm:ss a')}</strike></td></>
+            :<><td>{task.title}</td>
             <td>{task.description}</td>
-            <td> {task.finished?<>Task is Done</>:<>Not Done Yet</>}</td>
+            <td> Not Done Yet</td>
             <td> {moment(task.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
-            <td> {task.finished_at?moment(task.finished_at).format('MMMM Do YYYY, h:mm:ss a'):<>Task still running</>}</td>
+            <td> Task still running</td>
             
-            <td> {moment(task.updated_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
+            <td> {task.updated_at?<>{moment(task.updated_at).format('MMMM Do YYYY, h:mm:ss a')}</>:<>Status not updated</>}</td></>}
+
             <td>
 
                   <div

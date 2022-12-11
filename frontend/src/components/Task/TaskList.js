@@ -9,7 +9,7 @@ const TaskList = (props) => {
          <table class='table mt-3'>
             <thead>
                <tr>
-                  <th scope='col'>#</th>
+                  
                   <th scope='col'>Nom du lieu</th>
                   <th scope='col'>description</th>
                   <th scope='col'>finished</th>
