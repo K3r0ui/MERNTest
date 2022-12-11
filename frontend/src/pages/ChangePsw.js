@@ -20,7 +20,6 @@ export default function ChangePsw() {
    const onFinish = async (values) => {
       try {
          const res = await resetpsw(id,token,values);
-         console.log(res)
          message.success('Mot de passe changed successfully!');
          navigate('/');
       } catch (error) {

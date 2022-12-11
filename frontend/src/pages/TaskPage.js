@@ -32,7 +32,6 @@ const TaskPage = () => {
    // fonction pour fair l'appdate
    const handleUpdateTask = async (id, title,description,  finished) => {
       const src = await updateTask(id, title, description, finished);
-      console.log(src)
       const newData = data.map((x) => {
          if (x._id === id) {
             x.title = src.title;
@@ -62,7 +61,6 @@ const TaskPage = () => {
 
    const finish = async (title,description) => {
       const response = await postTask({title,description});
-      console.log(response)
       setVisible(false);
       
       if (response) {

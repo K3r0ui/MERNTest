@@ -59,16 +59,13 @@ const AuthentificationPage = () => {
     }
  };
  const handleResetChange = (email) => (e) => {
-    console.log(e.target.value);
     setValues({ ...values, [email]: e.target.value });
  };
   
  const handleResetSubmit = async (e) => {
     e.preventDefault();
-    console.log(email)
     try {
        const res = await reset(email);
-       console.log(res)
        message.success('Password sent to mail');
     } catch (err) {
        console.error(err.message);
